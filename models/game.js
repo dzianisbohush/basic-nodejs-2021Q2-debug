@@ -1,5 +1,7 @@
-module.exports = (sequelize, DataTypes) =>  {
-    return sequelize.define('game', {
+var db = require('../db');
+const {  DataTypes } = require('sequelize');
+
+module.exports =  db.define('game', {
         title: {
             type: DataTypes.STRING(25),
             allowNull: false,
@@ -35,4 +37,3 @@ module.exports = (sequelize, DataTypes) =>  {
             allowNull: false
         }
     })
-}
