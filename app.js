@@ -1,18 +1,21 @@
-var express = require('express');
-var app = express();
-var db = require('./db');
-var user = require('./controllers/usercontroller');
-var game = require('./controllers/gamecontroller')
-require('dotenv').config();
+const express = require('express');
+const loadersInit = require('./loaders');
+const { PORT } = require('./common/config');
 
-app.use(require('body-parser').json());
-app.use('/api/auth', user);
-app.use(require('./middleware/validate-session'))
-app.use('/api/game', game);
+const startServer = async () => {
+    const app = express();
 
-db.sync().then(() => {
-    app.listen(4000, function() {
-        console.log("App is listening on 4000");
-    })
-})
+    await loadersInit({ expressApp: app });
+
+    app.listen(PORT, (err) => {
+        if (err) {
+            console.log(err);
+            return;
+        }
+
+        console.log(`App is running on http://localhost:${PORT}`);
+    });
+};
+
+startServer();
 

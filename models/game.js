@@ -1,4 +1,4 @@
-var db = require('../db');
+const { db } = require('../loaders/sequelize');
 const {  DataTypes } = require('sequelize');
 
 module.exports =  db.define('game', {
